@@ -4,7 +4,7 @@ import { Button, message } from "antd";
 
 import { useWeb3React } from "@web3-react/core";
 
-import { IDKitWidget } from '@worldcoin/idkit';
+import { IDKitWidget, ISuccessResult } from '@worldcoin/idkit';
 
 import worldcoin_Logo from "assets/svg/worldcoin_Logo.svg";
 
@@ -22,9 +22,10 @@ const Verify: FC = (): ReactElement => {
       {contextHolder}
       <div style={{ width: "40%", minWidth: "250px" }}>
         <IDKitWidget
-            app_id="app_staging_6b1d1463ef75f0a8e198380169f843e9" // must be an app set to on-chain in Developer Portal
-            action="claim-mileage"
+            app_id="app_staging_fdc10b1e0a8eec162a505316be02ce76" // must be an app set to on-chain in Developer Portal
+            action="claim-mileage-cx"
             signal={account} // proof will only verify if the signal is unchanged, this prevents tampering
+            handleVerify={handleVerify} // use handleVerify before showing success screen / widget being closed
             onSuccess={onSuccess} // use onSuccess to call your smart contract
             // no use for handleVerify, so it is removed
             // use default verification_level (orb-only), as device credentials are not supported on-chain
@@ -43,7 +44,26 @@ const Verify: FC = (): ReactElement => {
   );
 };
 
-const onSuccess = () => {
+const handleVerify = async(successResult: ISuccessResult) => {
+  try {
+    // send request to backend and wait for the response
+    const backendUrl: string = process.env.REACT_APP_BACKEND_SERVICE || '';
+    const response = await fetch(`backendUrl/api/verify`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(successResult)
+    })
+    if (!response.ok){
+        // server returned a status code other than 200-299 --> something went wrong
+    }
+  } catch (error) {
+      // an error occured
+  }
+}
+
+const onSuccess = (/*result: ISuccessResult*/) => {
   // This is where you should perform any actions after the modal is closed
   // Such as redirecting the user to a new page
   //window.location.href = "/success";

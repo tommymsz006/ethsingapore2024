@@ -4,7 +4,7 @@ const { Title } = Typography;
 
 import { useWindowSize } from "hooks";
 
-import { Infos, SignMessage, Status, TransferEth, Verify } from "./components";
+import { Infos, SignMessage, Status, TransferEth, Verify, DropEmail } from "./components";
 
 const styles = {
   container: {
@@ -58,6 +58,7 @@ const DisplayPane: React.FC<DisplayPaneProps> = ({ isDarkMode }) => {
               {/* <SignMessage /> */}
               {!isTablet && <Divider type="vertical" style={{ fontSize: "120px !important" }} />}
               {/* <TransferEth /> */}
+              <DropEmail />
               <Verify />
             </div>
           </>
