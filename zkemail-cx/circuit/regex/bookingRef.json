@@ -1,0 +1,13 @@
+{
+    "parts":
+    [
+        {
+            "is_public": false,
+            "regex_def": "subject:=\\?UTF-8\\?B\\?WW91ciBlVGlja2V0IGlzIHJlYWR5OiB1c2UgYm9va2luZyByZWYg"
+        },
+        {
+            "is_public": true,
+            "regex_def": "[A-Za-z0-9]+"
+        }
+    ]
+}
