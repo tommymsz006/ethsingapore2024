@@ -44,6 +44,8 @@ try {
             console.log("bookingRef: ", unpackedValue);
             currentIndex += packedLength;
         }
+
+        console.log(JSON.stringify(inputs));
     })()
 } catch (e) {
     console.error("caught error: ", e);
