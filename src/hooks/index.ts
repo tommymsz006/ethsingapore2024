@@ -5,3 +5,4 @@ export * from "./useSwitchChain";
 export * from "./useToken";
 export * from "./useWindowSize";
 export * from "./useWriteContract";
+export * from "./useCXTicketVerifier";

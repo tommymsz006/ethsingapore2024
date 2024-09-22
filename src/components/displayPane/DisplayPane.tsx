@@ -1,10 +1,22 @@
 import { useWeb3React } from "@web3-react/core";
+import { useState } from "react";
 import { Divider, Typography } from "antd";
 const { Title } = Typography;
 
 import { useWindowSize } from "hooks";
 
+import { Button, message, Steps, theme } from 'antd';
+
 import { Infos, SignMessage, Status, TransferEth, Verify, DropEmail } from "./components";
+
+
+const stepItems = [
+  { key: 'drop-email', title: 'Drop Email' },
+  { key: 'verify-details', title: 'Verify Details' },
+  { key: 'prove-personhood', title: 'Prove Personhood' },
+  { key: 'claim-mileage', title: 'Claim Mileage' },
+  { key: 'reimburse', title: 'Reimburse Travel Expense' },
+];
 
 const styles = {
   container: {
@@ -37,6 +49,16 @@ type DisplayPaneProps = {
 const DisplayPane: React.FC<DisplayPaneProps> = ({ isDarkMode }) => {
   const { chainId, isActivating, isActive } = useWeb3React();
   const { isTablet } = useWindowSize();
+  
+  const [current, setCurrent] = useState(0);
+  
+  const nextStep = () => {
+    setCurrent(current + 1);
+  };
+
+  const prevStep = () => {
+    setCurrent(current - 1);
+  };
 
   return (
     <div
@@ -46,24 +68,32 @@ const DisplayPane: React.FC<DisplayPaneProps> = ({ isDarkMode }) => {
         width: isTablet ? "90%" : "80%"
       }}
     >
-      <Title>Display Info</Title>
-      <div style={styles.content}>
-        <Status isActivating={isActivating} isActive={isActive} />
-        <Infos chainId={chainId} />
+      <Steps current={current} items={stepItems} />
+      <Divider />
 
-        {isActive && (
+        {current === 0 && (
           <>
-            <Divider />
-            <div style={styles.action}>
-              {/* <SignMessage /> */}
-              {!isTablet && <Divider type="vertical" style={{ fontSize: "120px !important" }} />}
-              {/* <TransferEth /> */}
-              <DropEmail />
-              <Verify />
-            </div>
+            <DropEmail />
+            <Verify />
           </>
         )}
-      </div>
+        {current > 0 && (
+          <Button style={{ margin: '0 8px' }} onClick={() => prevStep()}>
+            ◀️ Previous
+          </Button>
+        )}
+        <span></span>
+        {current < stepItems.length - 1 && (
+          <Button type="primary" onClick={() => nextStep()}>
+            Next ▶️
+          </Button>
+        )}
+        <span></span>
+        {current === stepItems.length - 1 && (
+          <Button type="primary" onClick={() => message.success('Processing complete!')}>
+            ✅ Done
+          </Button>
+        )}
     </div>
   );
 };

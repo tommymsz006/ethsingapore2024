@@ -1,0 +1,122 @@
+[
+    {
+        "inputs":
+        [
+            {
+                "internalType": "contract IWorldID",
+                "name": "_worldId",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "_appId",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_action",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "inputs":
+        [],
+        "name": "InvalidNullifier",
+        "type": "error"
+    },
+    {
+        "inputs":
+        [],
+        "name": "InvalidTicketProof",
+        "type": "error"
+    },
+    {
+        "inputs":
+        [
+            {
+                "internalType": "uint256[2]",
+                "name": "_pA",
+                "type": "uint256[2]"
+            },
+            {
+                "internalType": "uint256[2][2]",
+                "name": "_pB",
+                "type": "uint256[2][2]"
+            },
+            {
+                "internalType": "uint256[2]",
+                "name": "_pC",
+                "type": "uint256[2]"
+            },
+            {
+                "internalType": "uint256[4]",
+                "name": "_pubSignals",
+                "type": "uint256[4]"
+            }
+        ],
+        "name": "ticketVerifyProof",
+        "outputs":
+        [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs":
+        [
+            {
+                "internalType": "uint256[2]",
+                "name": "pA",
+                "type": "uint256[2]"
+            },
+            {
+                "internalType": "uint256[2][2]",
+                "name": "pB",
+                "type": "uint256[2][2]"
+            },
+            {
+                "internalType": "uint256[2]",
+                "name": "pC",
+                "type": "uint256[2]"
+            },
+            {
+                "internalType": "uint256[4]",
+                "name": "pubSignals",
+                "type": "uint256[4]"
+            },
+            {
+                "internalType": "address",
+                "name": "signal",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "root",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "nullifierHash",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256[8]",
+                "name": "proof",
+                "type": "uint256[8]"
+            }
+        ],
+        "name": "verifyProofAndExecute",
+        "outputs":
+        [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]
